@@ -11,8 +11,10 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, `public`),
     watchContentBase: true,
-    open: true,
-    port: port,
+    open: `chrome`,
+    hot: true,
+    port,
+    historyApiFallback: true
   },
   resolve: {
     alias: {
