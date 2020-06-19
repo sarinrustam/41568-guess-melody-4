@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import ArtistAnswer from "../artist-answer/artist-answer.jsx";
 import {GameType} from "../../const.js";
 
 const ArtistQuestionScreen = (props) => {
@@ -15,7 +16,7 @@ const ArtistQuestionScreen = (props) => {
         </a>
 
         <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
-          <circle className="timer__line" cx="390" cy="390" r="370" style="filter: url(#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center" />
+          <circle className="timer__line" cx="390" cy="390" r="370" style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
         </svg>
 
         <div className="game__mistakes">
@@ -39,20 +40,15 @@ const ArtistQuestionScreen = (props) => {
         </div>
         <form className="game__artist">
           {answers.map((answer, i) => (
-            <div
+            <ArtistAnswer
               key={answer.artist}
-              className="artist">
-              <input className="artist__input visually-hidden" type="radio" name="answer" value={`answer-${i}`} id={`answer-${i}`}
-                onChange={(evt) => {
-                  evt.preventDefault();
-                  onAnswer(question, answer);
-                }}
-              />
-              <label className="artist__name" htmlFor={`answer-${i}`}>
-                <img className="artist__picture" src={answer.picture} alt={answer.artist}/>
-                Пелагея
-              </label>
-            </div>
+              answer={answer}
+              index={i}
+              onChange={(event) => {
+                event.preventDefault();
+                onAnswer(question, answer);
+              }}
+            />
           ))}
         </form>
       </section>

@@ -28,7 +28,7 @@ class GenreQuestionScreen extends PureComponent {
           <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
             <circle
               className="timer__line" cx="390" cy="390" r="370"
-              style="filter: url(#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"
+              style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}
             />
           </svg>
 
@@ -63,8 +63,11 @@ class GenreQuestionScreen extends PureComponent {
                     onChange={(evt) => {
                       const value = evt.target.checked;
 
+                      const newAnswers = [...userAnswers];
+                      newAnswers.splice(i, 1, value);
+
                       this.setState({
-                        answers: [...userAnswers.slice(0, i), value, ...userAnswers.slice(i + 1)],
+                        answers: newAnswers,
                       });
                     }}
                   />

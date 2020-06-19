@@ -14,6 +14,13 @@ class App extends PureComponent {
     this.state = {
       step: -1,
     };
+    this._onWelcomeButtonClick = this._onWelcomeButtonClick.bind(this);
+  }
+
+  _onWelcomeButtonClick() {
+    this.setState({
+      step: 0
+    });
   }
 
   _renderGameScreen() {
@@ -25,38 +32,38 @@ class App extends PureComponent {
       return (
         <WelcomeScreen
           errorsCount={errorsCount}
-          onWelcomeButtonClick={() => {
-            this.setState({
-              step: 0
-            });
-          }}
+          onWelcomeButtonClick={this._onWelcomeButtonClick}
         />
       );
     }
 
-    if (question) {
-      switch (question.type) {
-        case GameType.ARTIST:
-          return (
-            <ArtistQuestionScreen
-              question={question}
-              onAnswers={() => {
-                this.setState((prevStep) => ({
-                  step: prevStep.step + 1,
-                }));
-              }}
-            />
-          );
-        case GameType.GENRE:
-          return (
-            <GenreQuestionScreen
-              question={question}
-              onAnswers={(prevStep) => ({
+    if (!question) {
+      return null;
+    }
+
+    switch (question.type) {
+      case GameType.ARTIST:
+        return (
+          <ArtistQuestionScreen
+            question={question}
+            onAnswer={() => {
+              this.setState((prevStep) => ({
                 step: prevStep.step + 1,
-              })}
-            />
-          );
-      }
+              }));
+            }}
+          />
+        );
+      case GameType.GENRE:
+        return (
+          <GenreQuestionScreen
+            question={question}
+            onAnswer={() => {
+              this.setState((prevStep) => ({
+                step: prevStep.step + 1,
+              }));
+            }}
+          />
+        );
     }
 
     return null;
