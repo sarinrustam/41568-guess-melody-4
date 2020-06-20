@@ -14,16 +14,16 @@ class App extends PureComponent {
     this.state = {
       step: -1,
     };
-    this._onWelcomeButtonClick = this._onWelcomeButtonClick.bind(this);
+    this.onWelcomeButtonClick = this.onWelcomeButtonClick.bind(this);
   }
 
-  _onWelcomeButtonClick() {
+  onWelcomeButtonClick() {
     this.setState({
       step: 0
     });
   }
 
-  _renderGameScreen() {
+  renderGameScreen() {
     const {errorsCount, questions} = this.props;
     const {step} = this.state;
     const question = questions[step];
@@ -32,7 +32,7 @@ class App extends PureComponent {
       return (
         <WelcomeScreen
           errorsCount={errorsCount}
-          onWelcomeButtonClick={this._onWelcomeButtonClick}
+          onWelcomeButtonClick={this.onWelcomeButtonClick}
         />
       );
     }
@@ -76,7 +76,7 @@ class App extends PureComponent {
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            {this._renderGameScreen()}
+            {this.renderGameScreen()}
           </Route>
           <Route exact path="/artist">
             <ArtistQuestionScreen

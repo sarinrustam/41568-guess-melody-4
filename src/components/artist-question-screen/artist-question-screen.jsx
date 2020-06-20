@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import ArtistAnswer from "../artist-answer/artist-answer.jsx";
 import {GameType} from "../../const.js";
 
 const ArtistQuestionScreen = (props) => {
@@ -40,15 +39,20 @@ const ArtistQuestionScreen = (props) => {
         </div>
         <form className="game__artist">
           {answers.map((answer, i) => (
-            <ArtistAnswer
+            <div
               key={answer.artist}
-              answer={answer}
-              index={i}
-              onChange={(event) => {
-                event.preventDefault();
-                onAnswer(question, answer);
-              }}
-            />
+              className="artist">
+              <input className="artist__input visually-hidden" type="radio" name="answer" value={`answer-${i}`} id={`answer-${i}`}
+                onChange={(event) => {
+                  event.preventDefault();
+                  onAnswer(question, answer);
+                }}
+              />
+              <label className="artist__name" htmlFor={`answer-${i}`}>
+                <img className="artist__picture" src={answer.picture} alt={answer.artist}/>
+                {answer.artist}
+              </label>
+            </div>
           ))}
         </form>
       </section>

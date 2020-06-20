@@ -32,7 +32,13 @@ exports[`ArtistQuestionScreen is rendered correctly 1`] = `
         cx="390"
         cy="390"
         r="370"
-        style="filter: url(#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"
+        style={
+          Object {
+            "filter": "url(#blur)",
+            "transform": "rotate(-90deg) scaleY(-1)",
+            "transformOrigin": "center",
+          }
+        }
       />
     </svg>
     <div
@@ -99,7 +105,7 @@ exports[`ArtistQuestionScreen is rendered correctly 1`] = `
             className="artist__picture"
             src="https://api.adorable.io/avatars/128/0"
           />
-          Пелагея
+          John Snow
         </label>
       </div>
       <div
@@ -122,7 +128,7 @@ exports[`ArtistQuestionScreen is rendered correctly 1`] = `
             className="artist__picture"
             src="https://api.adorable.io/avatars/128/1"
           />
-          Пелагея
+          Jack Daniels
         </label>
       </div>
       <div
@@ -145,7 +151,7 @@ exports[`ArtistQuestionScreen is rendered correctly 1`] = `
             className="artist__picture"
             src="https://api.adorable.io/avatars/128/2"
           />
-          Пелагея
+          Jim Beam
         </label>
       </div>
     </form>
