@@ -18,17 +18,6 @@ exports[`Render Genre Question Screen Should GenreRenderScreen render correctly 
     <div
       className="track"
     >
-      <button
-        className="track__button track__button--pause"
-        onClick={[Function]}
-        type="button"
-      >
-        <div
-          className="track__status"
-        >
-          <audio />
-        </div>
-      </button>
       <div
         className="game__answer"
       >
@@ -52,17 +41,6 @@ exports[`Render Genre Question Screen Should GenreRenderScreen render correctly 
     <div
       className="track"
     >
-      <button
-        className="track__button track__button--pause"
-        onClick={[Function]}
-        type="button"
-      >
-        <div
-          className="track__status"
-        >
-          <audio />
-        </div>
-      </button>
       <div
         className="game__answer"
       >
@@ -86,17 +64,6 @@ exports[`Render Genre Question Screen Should GenreRenderScreen render correctly 
     <div
       className="track"
     >
-      <button
-        className="track__button track__button--pause"
-        onClick={[Function]}
-        type="button"
-      >
-        <div
-          className="track__status"
-        >
-          <audio />
-        </div>
-      </button>
       <div
         className="game__answer"
       >
@@ -120,17 +87,6 @@ exports[`Render Genre Question Screen Should GenreRenderScreen render correctly 
     <div
       className="track"
     >
-      <button
-        className="track__button track__button--pause"
-        onClick={[Function]}
-        type="button"
-      >
-        <div
-          className="track__status"
-        >
-          <audio />
-        </div>
-      </button>
       <div
         className="game__answer"
       >
