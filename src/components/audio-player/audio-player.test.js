@@ -11,8 +11,10 @@ const mock = {
 
 it(`AudioPlayer is rendered correctly`, () => {
   const {song} = mock;
+  const handlerClick = jest.fn();
 
   const tree = renderer.create(<AudioPlayer
+    onPlayButtonClick={handlerClick}
     isPlaying={false}
     src={song.src}
   />,
