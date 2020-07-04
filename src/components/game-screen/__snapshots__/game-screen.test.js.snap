@@ -45,14 +45,18 @@ exports[`GameScreen render correctly with GameType.ARTIST type 1`] = `
       className="game__mistakes"
     >
       <div
-        className="wrong"
-      />
-      <div
-        className="wrong"
-      />
-      <div
-        className="wrong"
-      />
+        className="game__mistakes"
+      >
+        <div
+          className="wrong"
+        />
+        <div
+          className="wrong"
+        />
+        <div
+          className="wrong"
+        />
+      </div>
     </div>
   </header>
   <section
@@ -106,14 +110,18 @@ exports[`GameScreen render correctly with GameType.GENRE type 1`] = `
       className="game__mistakes"
     >
       <div
-        className="wrong"
-      />
-      <div
-        className="wrong"
-      />
-      <div
-        className="wrong"
-      />
+        className="game__mistakes"
+      >
+        <div
+          className="wrong"
+        />
+        <div
+          className="wrong"
+        />
+        <div
+          className="wrong"
+        />
+      </div>
     </div>
   </header>
   <section
