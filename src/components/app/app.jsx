@@ -14,6 +14,16 @@ import WelcomeScreen from "../welcome-screen/welcome-screen.jsx";
 const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
 const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
 
+const isArtistAnswerCorrect = (question, userAnswer) => {
+  return userAnswer.artist === question.song.artist;
+};
+
+const isGenreAnswerCorrect = (question, userAnswer) => {
+  return userAnswer.every((answer, i) => {
+    return answer === (question.answers[i].genre === question.genre);
+  });
+};
+
 class App extends PureComponent {
   renderGameScreen() {
     const {
@@ -112,8 +122,19 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.incrementStep());
   },
   onUserAnswer(question, answer) {
+    let answerIsCorrect = false;
+
+    switch (question.type) {
+      case GameType.ARTIST:
+        answerIsCorrect = isArtistAnswerCorrect(question, answer);
+        break;
+      case GameType.GENRE:
+        answerIsCorrect = isGenreAnswerCorrect(question, answer);
+        break;
+    }
+
     dispatch(ActionCreator.incrementStep());
-    dispatch(ActionCreator.incrementMistake(question, answer));
+    dispatch(ActionCreator.incrementMistake(answerIsCorrect));
   },
 });
 

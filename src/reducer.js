@@ -1,5 +1,4 @@
 import {extend} from "./utils/utils.js";
-import {GameType} from "./const.js";
 import questions from "../src/mocks/questions.js";
 
 const initialState = {
@@ -9,16 +8,6 @@ const initialState = {
   questions,
 };
 
-const isArtistAnswerCorrect = (question, userAnswer) => {
-  return userAnswer.artist === question.song.artist;
-};
-
-const isGenreAnswerCorrect = (question, userAnswer) => {
-  return userAnswer.every((it, i) => {
-    return it === (question.answers[i].genre === question.genre);
-  });
-};
-
 const ActionType = {
   INCREMENT_MISTAKES: `INCREMENT_MISTAKES`,
   INCREMENT_STEP: `INCREMENT_STEP`,
@@ -26,35 +15,21 @@ const ActionType = {
 
 const ActionCreator = {
   incrementStep: () => ({
-    type: ActionType.INCREMENT_STEP,
-    payload: 1,
+    type: ActionType.INCREMENT_STEP
   }),
-  incrementMistake: (question, userAnswer) => {
-    let answerIsCorrect = false;
-
-    switch (question.type) {
-      case GameType.ARTIST:
-        answerIsCorrect = isArtistAnswerCorrect(question, userAnswer);
-        break;
-      case GameType.GENRE:
-        answerIsCorrect = isGenreAnswerCorrect(question, userAnswer);
-        break;
-    }
-
-    return {
-      type: ActionType.INCREMENT_MISTAKES,
-      payload: answerIsCorrect ? 0 : 1,
-    };
-  },
+  incrementMistake: (answerIsCorrect) => ({
+    type: ActionType.INCREMENT_MISTAKES,
+    payload: answerIsCorrect ? 0 : 1,
+  }),
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.INCREMENT_STEP:
-      let nextStep = state.step + action.payload;
+      let nextStep = state.step + 1;
 
       if (nextStep >= state.questions.length) {
-        return extend({}, initialState);
+        return extend(initialState);
       }
 
       return extend(state, {
@@ -65,7 +40,7 @@ const reducer = (state = initialState, action) => {
       const mistakes = state.mistakes + action.payload;
 
       if (mistakes >= state.maxMistakes) {
-        return extend({}, initialState);
+        return extend(initialState);
       }
 
       return extend(state, {

@@ -4,11 +4,15 @@ import PropTypes from "prop-types";
 const Mistakes = (props) => {
   const {count} = props;
 
-  const mistakes = new Array(count).fill(``);
+  const mistakes = [];
+
+  for (let i = 0; i < count; i++) {
+    mistakes.push(<div key={i} className="wrong" />);
+  }
 
   return (
     <div className="game__mistakes">
-      {mistakes.map((it, i) => <div key={`mistake-${i}`} className="wrong" />)}
+      {mistakes}
     </div>
   );
 };
