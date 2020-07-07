@@ -134,7 +134,9 @@ const mapDispatchToProps = (dispatch) => ({
     }
 
     dispatch(ActionCreator.incrementStep());
-    dispatch(ActionCreator.incrementMistake(answerIsCorrect));
+    if (!answerIsCorrect) {
+      dispatch(ActionCreator.incrementMistake());
+    }
   },
 });
 

@@ -17,9 +17,8 @@ const ActionCreator = {
   incrementStep: () => ({
     type: ActionType.INCREMENT_STEP
   }),
-  incrementMistake: (answerIsCorrect) => ({
+  incrementMistake: () => ({
     type: ActionType.INCREMENT_MISTAKES,
-    payload: answerIsCorrect ? 0 : 1,
   }),
 };
 
@@ -37,14 +36,14 @@ const reducer = (state = initialState, action) => {
       });
 
     case ActionType.INCREMENT_MISTAKES:
-      const mistakes = state.mistakes + action.payload;
+      const mistakes = state.mistakes + 1;
 
       if (mistakes >= state.maxMistakes) {
         return extend(initialState);
       }
 
       return extend(state, {
-        mistakes: state.mistakes + action.payload,
+        mistakes
       });
   }
 
