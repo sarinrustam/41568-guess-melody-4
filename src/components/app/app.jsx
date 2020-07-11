@@ -4,15 +4,18 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
 
+import GameScreen from "../game-screen/game-screen.jsx";
+import withActivePlayer from "../hocs/with-active-player/with-active-player.js";
+import withUserAnswer from "../hocs/with-user-answer/with-user-answer.js";
+
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen.jsx";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen.jsx";
-import GameScreen from "../game-screen/game-screen.jsx";
-import withAudioPlayer from "../hocs/with-audio-player/with-audio-player.js";
+
 import {GameType} from "../../const.js";
 import WelcomeScreen from "../welcome-screen/welcome-screen.jsx";
 
-const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
-const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
+const GenreQuestionScreenWrapped = withActivePlayer(withUserAnswer(GenreQuestionScreen));
+const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 
 const isArtistAnswerCorrect = (question, userAnswer) => {
   return userAnswer.artist === question.song.artist;
