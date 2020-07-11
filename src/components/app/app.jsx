@@ -4,15 +4,20 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
 
+import GameScreen from "../game-screen/game-screen.jsx";
+import withActivePlayer from "../hocs/with-active-player/with-active-player.js";
+import withUserAnswer from "../hocs/with-user-answer/with-user-answer.js";
+
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen.jsx";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen.jsx";
-import GameScreen from "../game-screen/game-screen.jsx";
-import withAudioPlayer from "../hocs/with-audio-player/with-audio-player.js";
+import GameOverScreen from "../game-over-screen/game-over-screen.jsx";
+import WinScreen from "../win-screen/win-screen.jsx";
+
 import {GameType} from "../../const.js";
 import WelcomeScreen from "../welcome-screen/welcome-screen.jsx";
 
-const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
-const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
+const GenreQuestionScreenWrapped = withActivePlayer(withUserAnswer(GenreQuestionScreen));
+const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 
 const isArtistAnswerCorrect = (question, userAnswer) => {
   return userAnswer.artist === question.song.artist;
@@ -28,7 +33,9 @@ class App extends PureComponent {
   renderGameScreen() {
     const {
       maxMistakes,
+      mistakes,
       questions,
+      resetGame,
       onUserAnswer,
       onWelcomeButtonClick,
       step,
@@ -36,11 +43,29 @@ class App extends PureComponent {
 
     const question = questions[step];
 
-    if (step === -1 || step >= questions.length) {
+    if (step === -1) {
       return (
         <WelcomeScreen
           errorsCount={maxMistakes}
           onWelcomeButtonClick={onWelcomeButtonClick}
+        />
+      );
+    }
+
+    if (mistakes >= maxMistakes) {
+      return (
+        <GameOverScreen
+          onReplayButtonClick={resetGame}
+        />
+      );
+    }
+
+    if (step >= questions.length) {
+      return (
+        <WinScreen
+          questionsCount={questions.length}
+          mistakesCount={mistakes}
+          onReplayButtonClick={resetGame}
         />
       );
     }
@@ -105,16 +130,19 @@ class App extends PureComponent {
 
 App.propTypes = {
   maxMistakes: PropTypes.number.isRequired,
+  mistakes: PropTypes.number.isRequired,
   questions: PropTypes.array.isRequired,
   onUserAnswer: PropTypes.func.isRequired,
   onWelcomeButtonClick: PropTypes.func.isRequired,
   step: PropTypes.number.isRequired,
+  resetGame: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   step: state.step,
   maxMistakes: state.maxMistakes,
   questions: state.questions,
+  mistakes: state.mistakes,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -134,9 +162,13 @@ const mapDispatchToProps = (dispatch) => ({
     }
 
     dispatch(ActionCreator.incrementStep());
+
     if (!answerIsCorrect) {
       dispatch(ActionCreator.incrementMistake());
     }
+  },
+  resetGame() {
+    dispatch(ActionCreator.resetGame());
   },
 });
 
