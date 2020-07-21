@@ -56,13 +56,13 @@ it(`Checks that HOC's callback turn off audio (pause)`, () => {
 
   window.HTMLMediaElement.prototype.pause = () => {};
 
-  const {audioRef} = wrapper.instance();
+  const {_audioRef} = wrapper.instance();
 
-  jest.spyOn(audioRef.current, `pause`);
+  jest.spyOn(_audioRef.current, `pause`);
 
   wrapper.instance().componentDidMount();
 
   wrapper.find(`button`).simulate(`click`);
 
-  expect(audioRef.current.pause).toHaveBeenCalledTimes(1);
+  expect(_audioRef.current.pause).toHaveBeenCalledTimes(1);
 });
