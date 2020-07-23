@@ -204,6 +204,7 @@ describe(`Render App`, () => {
       },
     });
 
+
     const tree = renderer
       .create(
           <Provider store={store}>
