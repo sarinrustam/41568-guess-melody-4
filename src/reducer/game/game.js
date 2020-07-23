@@ -1,11 +1,9 @@
-import {extend} from "./utils/utils.js";
-import questions from "../src/mocks/questions.js";
+import {extend} from "../../utils/utils.js";
 
 const initialState = {
   mistakes: 0,
   maxMistakes: 3,
   step: -1,
-  questions,
 };
 
 const ActionType = {
