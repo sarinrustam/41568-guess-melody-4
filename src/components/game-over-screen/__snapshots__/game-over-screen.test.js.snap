@@ -24,12 +24,12 @@ exports[`GameOverScreen render correctly Should GOS render correctly 1`] = `
   >
     У вас закончились все попытки. Ничего, повезёт в следующий раз!
   </p>
-  <button
+  <a
     className="replay"
-    onClick={[MockFunction]}
-    type="button"
+    href="/"
+    onClick={[Function]}
   >
     Сыграть ещё раз
-  </button>
+  </a>
 </section>
 `;
