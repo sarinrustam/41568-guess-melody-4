@@ -144,18 +144,6 @@ class App extends PureComponent {
           >
 
           </PrivateRoute>
-          {/* <Route exact path="/artist">
-            <ArtistQuestionScreenWrapped
-              question={questions[1]}
-              onAnswer={() => {}}
-            />
-          </Route> */}
-          {/* <Route exact path="/genre">
-            <GenreQuestionScreenWrapped
-              question={questions[0]}
-              onAnswer={() => {}}
-            />
-          </Route> */}
         </Switch>
       </Router>
     );
